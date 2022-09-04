@@ -8,7 +8,7 @@ class Student:
         self.root = root
         self.root.title("Student Management System")
         self.root.geometry('1400x800')
-        title=Label(self.root,text="Student Management System",bd=10,relief=GROOVE,font=("times new roman",40,"bold"),bg="blue",fg="red")
+        title=Label(self.root,text="Student Management System",bd=10,relief=GROOVE,font=("times new roman",40,"bold"),bg="black",fg="blue")
         title.pack(side=TOP,fill=X)
 
         #=======All variables=========
@@ -51,7 +51,7 @@ class Student:
         lbl_Gender= Label(Manage_Frame, text="Gender", font=("times new roman", 20, "bold"), bg="crimson", fg="white")
         lbl_Gender.grid(row=4, column=0, pady=10, padx=20, sticky="w")
 
-        combo_gender = ttk.Combobox(Manage_Frame,textvariable=self.gender_var,font=("times new roman", 13, "bold"))
+        combo_gender = ttk.Combobox(Manage_Frame,textvariable=self.gender_var,font=("times new roman", 13, "bold"),state='readonly')
         combo_gender['values'] = ("Male", "Female", "Other")
         combo_gender.grid(row=4, column=1, padx=20, pady=10, sticky="w")
 
@@ -87,7 +87,7 @@ class Student:
     #======Detail Frame===============
 
         Detail_Frame = Frame(self.root, bd=4, relief=RIDGE, bg="crimson")
-        Detail_Frame.place(x=500, y=100, width=800, height=590)
+        Detail_Frame.place(x=500, y=100, width=900, height=590)
 
         lbl_search = Label(Detail_Frame, text="Search", font=("times new roman", 20, "bold"), bg="crimson",
                            fg="white")
@@ -104,7 +104,7 @@ class Student:
     #=======Table Frame================
 
         Table_Frame = Frame(Detail_Frame, bd=4, relief=RIDGE, bg="crimson")
-        Table_Frame.place(x=10, y=70, width=760, height=500)
+        Table_Frame.place(x=10, y=70, width=850, height=500)
 
         scroll_x =Scrollbar(Table_Frame,orient=HORIZONTAL)
         scroll_y =Scrollbar(Table_Frame, orient=VERTICAL)
@@ -124,18 +124,18 @@ class Student:
 
         self.Student_Table.column("roll",width=80)
         self.Student_Table.column("name", width=100)
-        self.Student_Table.column("email", width=130)
+        self.Student_Table.column("email", width=200)
         self.Student_Table.column("gender", width=90)
         self.Student_Table.column("contact", width=100)
         self.Student_Table.column("dob", width=100)
-        self.Student_Table.column("Address", width=150)
+        self.Student_Table.column("Address", width=350)
         self.Student_Table.pack(fill=BOTH ,expand=1)
         self.Student_Table.bind("<ButtonRelease-1>",self.get_cursor)
 
         self.fetch_data()
 
     def add_students(self):
-        if self.Roll_No_var.get()=="" or self.name_var.get()=="":
+        if self.Roll_No_var.get()=="" or self.name_var.get()=="" or self.email_var.get()=="" :
             messagebox.showerror("Error","All fields are required to fill")
         else:
             con = pymysql.connect(host="localhost", user="root", password="", database="stm")
